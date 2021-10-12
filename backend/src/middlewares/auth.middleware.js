@@ -12,8 +12,10 @@ async function isAuthenticated(req, res, next) {
           .status(401)
           .json({ success: false, error: 'Unauthenticated' });
       } else {
-        req.jwt = jwt.verify(authorization[1], secret);
-        req.user = await User.findOne({ email: req.jwt.email });
+        // req.jwt = jwt.verify(authorization[1], secret);
+        let token = authorization[1];
+        req.user = await User.findOne({ token });
+        req.token = token;
         if (!req.user) {
           return res
             .status(403)
