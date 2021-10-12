@@ -8,6 +8,7 @@ const seedAdmin = async () => {
   const adminEmail = process.env.DETAULT_ADMIN_EMAIL;
   const adminPassword = process.env.DEFAULT_ADMIN_PASSWORD;
   const adminMaxCalories = process.env.DEFAULT_ADMIN_CALORIES;
+  const adminToken = process.env.DEFAULT_ADMIN_TOKEN;
   const admin = await User.findOne({ email: adminEmail });
   if (!admin) {
     const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
@@ -17,7 +18,29 @@ const seedAdmin = async () => {
       email: adminEmail,
       password: passwordHash,
       maxCalories: adminMaxCalories,
+      token: adminToken,
       role: 'admin',
+    });
+  }
+};
+
+const seedUser = async () => {
+  const userName = process.env.DEFAULT_USER_NAME;
+  const userEmail = process.env.DETAULT_USER_EMAIL;
+  const userPassword = process.env.DEFAULT_USER_PASSWORD;
+  const userMaxCalories = process.env.DEFAULT_USER_CALORIES;
+  const userToken = process.env.DEFAULT_USER_TOKEN;
+  const user = await User.findOne({ email: userEmail });
+  if (!user) {
+    const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
+    const passwordHash = await bcrypt.hash(userPassword, saltRounds);
+    await User.create({
+      name: userName,
+      email: userEmail,
+      password: passwordHash,
+      maxCalories: userMaxCalories,
+      token: userToken,
+      role: 'user',
     });
   }
 };
@@ -32,6 +55,7 @@ const connectDb = async () => {
 const applyDatabaseSetup = async () => {
   await connectDb();
   await seedAdmin();
+  await seedUser();
 };
 
 export default applyDatabaseSetup;
