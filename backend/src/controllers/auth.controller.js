@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import userService from '../services/user.service';
+import { generate_token } from '../utils/token';
 
 class AuthController {
   async signup(req, res) {
@@ -13,22 +14,15 @@ class AuthController {
           error: 'User already exists with this email',
         });
       }
-      const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
-      req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+      const password = generate_token(6);
+      req.body.password = await bcrypt.hash(password, saltRounds);
+      req.body.token = generate_token(32);
 
       await userService.create({
         ...req.body,
         role: 'user',
       });
 
-      const jwtSecret = process.env.JWT_SECRET;
-      const token = await jwt.sign(
-        {
-          email: req.body.email,
-          name: req.body.name,
-        },
-        jwtSecret
-      );
       res.status(201).json({ success: true, token });
     } catch (err) {
       console.error(err);
@@ -38,32 +32,13 @@ class AuthController {
 
   async login(req, res) {
     try {
-      const userByEmail = await userService.findByEmail(req.body.email);
-      if (!userByEmail) {
-        return res
-          .status(401)
-          .json({ success: false, error: 'Authentication failed' });
-      }
-      //check if password matches with the Hash
-      const match = await bcrypt.compare(
-        req.body.password,
-        userByEmail.password
-      );
-
-      if (!match) {
+      const userByToken = await userService.findByToken(req.body.token);
+      if (!userByToken) {
         return res
           .status(401)
           .json({ success: false, error: 'Authentication failed' });
       }
 
-      const jwtSecret = process.env.JWT_SECRET;
-      const token = await jwt.sign(
-        {
-          email: req.body.email,
-          name: userByEmail.name,
-        },
-        jwtSecret
-      );
       res.status(200).json({ success: true, token });
     } catch (err) {
       console.error(err);
