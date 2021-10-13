@@ -3,10 +3,17 @@ import * as APIPaths from '../utils/APIPaths';
 
 const baseUrl = APIPaths.baseUrl;
 
-export const login = payload => {
-  //payload contains one field named token
+export const getAllFoodEntryOfUser = (userId, page) => {
+  const token = localStorage.getItem('authToken');
+
+  const queryString = `/${userId}?page=${page}`;
+
   return axios
-    .post(baseUrl + APIPaths.login, payload)
+    .get(baseUrl + APIPaths.listFoodEntriesOfUser + queryString, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then(response => response.data)
     .catch(
       err =>
@@ -17,11 +24,13 @@ export const login = payload => {
     );
 };
 
-export const me = () => {
+export const createFoodEntry = foodEntryInput => {
   const token = localStorage.getItem('authToken');
+
   return axios
-    .get(baseUrl + APIPaths.me, {
+    .post(baseUrl + APIPaths.createFoodEntry, foodEntryInput, {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     })
