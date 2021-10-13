@@ -13,9 +13,9 @@ import {useFormik} from 'formik';
 import {useState} from 'react';
 import * as yup from 'yup';
 
-import {login} from '../../../dataAccess/auth';
-import {useUpdateAuthenticatedUser} from '../../../providers/AuthProvider';
-import CustomAlert from '../../common/Alert';
+import {login} from '../../dataAccess/auth';
+import {useUpdateAuthenticatedUser} from '../../providers/AuthProvider';
+import CustomAlert from '../../components/common/Alert';
 
 const validationSchema = yup.object({
   token: yup.string().required('This field cannot be empty'),

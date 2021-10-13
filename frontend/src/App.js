@@ -2,7 +2,7 @@ import AppRoute from './components/common/AppRoute';
 import AuthProvider from './providers/AuthProvider';
 import {Route, Switch} from 'react-router-dom';
 import Navbar from './components/common/Navbar';
-import Login from './components/pages/login/Login';
+import Login from './pages/login/Login';
 
 function App() {
   return (
