@@ -1,12 +1,12 @@
-import reportService from '../services/report.service';
-import moment from 'moment';
+import reportService from "../services/report.service";
+import moment from "moment";
 
 class ReportController {
   async getNumberOfFoodEntriesReport(req, res) {
     try {
-      const today = moment().format('YYYY-MM-DD');
-      const past7days = moment().subtract('days', 7).format('YYYY-MM-DD');
-      const past14days = moment().subtract('days', 14).format('YYYY-MM-DD');
+      const today = moment().format("YYYY-MM-DD");
+      const past7days = moment().subtract("days", 7).format("YYYY-MM-DD");
+      const past14days = moment().subtract("days", 14).format("YYYY-MM-DD");
       console.log(today, past7days, past14days);
       const pastWeekCount = await reportService.getNumberOfFoodEntriesInRange(
         past7days,
@@ -21,14 +21,14 @@ class ReportController {
         .json({ success: true, data: { pastWeekCount, past2WeekCount } });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
   async getNumberOfCaloriesPerUser(req, res) {
     try {
-      const today = moment().format('YYYY-MM-DD');
-      const past7days = moment().subtract('days', 7).format('YYYY-MM-DD');
+      const today = moment().format("YYYY-MM-DD");
+      const past7days = moment().subtract("days", 7).format("YYYY-MM-DD");
       const entries = await reportService.getAverageCaloriesPerUserInPastWeek(
         past7days,
         today
@@ -36,7 +36,7 @@ class ReportController {
       res.status(200).json({ success: true, data: { entries } });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
@@ -45,11 +45,10 @@ class ReportController {
       const entries = await reportService.getTotalCaloriesPerUserPerDay(
         req.params.userId
       );
-      console.log(entries);
       res.status(200).json({ success: true, data: { entries } });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 }

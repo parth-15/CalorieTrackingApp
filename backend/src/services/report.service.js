@@ -1,5 +1,5 @@
-import FoodEntry from '../models/foodEntry.model';
-import mongoose from 'mongoose';
+import FoodEntry from "../models/foodEntry.model";
+import mongoose from "mongoose";
 
 class ReportService {
   async getNumberOfFoodEntriesInRange(startDate, endDate) {
@@ -9,7 +9,7 @@ class ReportService {
         $lte: endDate,
       },
     });
-    console.log('count is', count);
+    console.log("count is", count);
     return count;
   }
 
@@ -25,9 +25,9 @@ class ReportService {
       },
       {
         $group: {
-          _id: '$user',
+          _id: "$user",
           average: {
-            $avg: '$calories',
+            $avg: "$calories",
           },
         },
       },
@@ -46,15 +46,17 @@ class ReportService {
       },
       {
         $group: {
-          _id: '$date',
+          _id: "$date",
           sum: {
-            $sum: '$calories',
+            $sum: "$calories",
           },
         },
       },
     ]);
-    console.log(entries);
-    return entries;
+    const sortedEntriesByDate = entries.sort(function (a, b) {
+      return new Date(b._id) - new Date(a._id);
+    });
+    return sortedEntriesByDate;
   }
 }
 
