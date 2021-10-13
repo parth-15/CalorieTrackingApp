@@ -1,9 +1,17 @@
-import {Box, Container, makeStyles, Typography} from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Container,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import {useEffect, useState} from 'react';
 import FoodEntryCard from '../../components/home/FoodEntryCard';
 import {getAllFoodEntryOfUser} from '../../dataAccess/foodEntry';
 import {useAuthenticatedUser} from '../../providers/AuthProvider';
 import Pagination from '@material-ui/lab/Pagination';
+import AddIcon from '@material-ui/icons/Add';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   paginationContainer: {display: 'flex', justifyContent: 'center'},
@@ -11,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     marginTop: theme.spacing(12),
+  },
+  button: {
+    marginRight: 15,
   },
 }));
 
@@ -40,7 +51,32 @@ export default function Home() {
           <Typography component="h2" variant="h4" style={{flexGrow: 1}}>
             Foodentries
           </Typography>
-
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            component={Link}
+            to="/create"
+          >
+            Foodentry
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            component={Link}
+            to="/meals"
+          >
+            Meals
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+          >
+            Report
+          </Button>
           {/* Add three buttons here for user reporting */}
         </Box>
         {foodEntries.map(foodEntry => (
