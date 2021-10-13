@@ -1,5 +1,5 @@
-import foodEntryService from '../services/foodEntry.service';
-import mealService from '../services/meal.service';
+import foodEntryService from "../services/foodEntry.service";
+import mealService from "../services/meal.service";
 
 class FoodEntryController {
   async listFoodEntries(req, res) {
@@ -12,7 +12,7 @@ class FoodEntryController {
       });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
@@ -27,7 +27,7 @@ class FoodEntryController {
       });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
@@ -40,7 +40,7 @@ class FoodEntryController {
       });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
@@ -60,14 +60,14 @@ class FoodEntryController {
         return res.status(400).json({
           success: false,
           error:
-            'Exceeding food entries for given meal and user for given date',
+            "Exceeding food entries for given meal and user for given date",
         });
       }
       const foodEntryId = await foodEntryService.create(req.body);
       res.status(201).json({ success: true, data: { id: foodEntryId } });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
@@ -95,7 +95,7 @@ class FoodEntryController {
           return res.status(400).json({
             success: false,
             error:
-              'Exceeding food entries for given meal and user for given date',
+              "Exceeding food entries for given meal and user for given date",
           });
         }
         const id = await foodEntryService.putById(foodEntryId, req.body);
@@ -103,7 +103,7 @@ class FoodEntryController {
       }
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 
@@ -113,13 +113,13 @@ class FoodEntryController {
       if (!foodEntry) {
         return res
           .status(404)
-          .json({ success: false, error: 'FoodEntry not found' });
+          .json({ success: false, error: "FoodEntry not found" });
       }
       await foodEntryService.deleteById(req.params.foodEntryId);
       res.status(204).json({});
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: 'Something went wrong' });
+      res.status(500).json({ success: false, error: "Something went wrong" });
     }
   }
 }
