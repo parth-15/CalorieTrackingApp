@@ -74,6 +74,8 @@ export default function Home() {
             className={classes.button}
             variant="contained"
             color="primary"
+            component={Link}
+            to="/userreport"
           >
             Report
           </Button>
