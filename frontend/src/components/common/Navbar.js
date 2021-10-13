@@ -11,6 +11,7 @@ import {
   useAuthenticatedUser,
   useUpdateAuthenticatedUser,
 } from '../../providers/AuthProvider';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,7 +42,7 @@ export default function Navbar() {
           <Box className={classes.box}>
             <Button
               color="inherit"
-              component="Link"
+              component={Link}
               to="/"
               startIcon={<HomeIcon />}
             >
@@ -50,7 +51,7 @@ export default function Navbar() {
           </Box>
 
           {authenticatedUser.role === 'admin' && (
-            <Button color="inherit" component="Link" to="/admin">
+            <Button color="inherit" component={Link} to="/admin">
               Admin Panel
             </Button>
           )}

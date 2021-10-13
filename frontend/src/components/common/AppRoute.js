@@ -28,7 +28,7 @@ export default function AppRoute({
     );
   }
 
-  if (restrictedTo === 'autheticated') {
+  if (restrictedTo === 'authenticated') {
     return (
       <Route
         {...otherProps}
