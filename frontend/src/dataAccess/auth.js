@@ -3,9 +3,10 @@ import * as APIPaths from '../utils/APIPaths';
 
 const baseUrl = APIPaths.baseUrl;
 
-export const logIn = token => {
+export const login = payload => {
+  //payload contains one field named token
   return axios
-    .post(baseUrl + APIPaths.login, {token: token})
+    .post(baseUrl + APIPaths.login, payload)
     .then(response => response.data)
     .catch(err => err || {success: false, error: 'Something went wrong'});
 };

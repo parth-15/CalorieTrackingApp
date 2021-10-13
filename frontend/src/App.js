@@ -2,19 +2,15 @@ import AppRoute from './components/common/AppRoute';
 import AuthProvider from './providers/AuthProvider';
 import {Route, Switch} from 'react-router-dom';
 import Navbar from './components/common/Navbar';
+import Login from './components/pages/login/Login';
 
 function App() {
   return (
     <AuthProvider>
       <Navbar />
       <Switch>
-        <AppRoute
-          restrictedTo="guest"
-          exact
-          path="/login"
-          // component={Login}
-        />
-        <AppRoute
+        <AppRoute restrictedTo="guest" exact path="/login" component={Login} />
+        {/* <AppRoute
           restrictedTo="authenticated"
           exact
           path="/"
@@ -30,7 +26,7 @@ function App() {
         <Route
           path="*"
           // component={Error404}
-        />
+        /> */}
       </Switch>
     </AuthProvider>
   );
