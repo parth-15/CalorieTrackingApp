@@ -11,6 +11,9 @@ import AddIcon from '@material-ui/icons/Add';
 import CreateFoodEntryModal from '../../components/home/CreateFoodEntryModal';
 import Pagination from '@material-ui/lab/Pagination';
 import FoodEntryTable from './FoodEntryTable';
+import {Link} from 'react-router-dom';
+import CustomAlert from '../../components/common/Alert';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 const useStyles = makeStyles(theme => ({
   paginationContainer: {display: 'flex', justifyContent: 'center'},
@@ -59,6 +62,7 @@ export default function Admin() {
   const handleOpenAlert = (severity, message) => {
     setAlertSeverity(severity);
     setAlertMessage(message);
+    setOpenAlert(true);
   };
 
   const handleCreateModal = foodEntryInput => {
@@ -80,14 +84,16 @@ export default function Admin() {
           <Typography className={classes.heading} variant="h5">
             Manage Food Entries
           </Typography>
-          {/* <Button
+          <Button
+            className={classes.button}
             variant="contained"
             color="primary"
-            startIcon={<AddIcon />}
-            onClick={toggleCreateModalOpen}
+            startIcon={<AssessmentIcon />}
+            component={Link}
+            to="/adminreport"
           >
-            Add Food Entry
-          </Button> */}
+            Reporting
+          </Button>
         </Box>
 
         <FoodEntryTable
@@ -98,28 +104,14 @@ export default function Admin() {
           setPage={setPage}
           handleOpenAlert={handleOpenAlert}
         />
-
-        {/* foodEntries,
-  count,
-  fetchFoodEntries,
-  page,
-  setPage,
-  handleOpenAlert, */}
-
-        {/* <CreateFoodEntryModal
-          open={createModalOpen}
-          onClose={toggleCreateModalOpen}
-          onCreate={handleCreateModal}
-        /> */}
       </Container>
-      {/* <Box className={classes.paginationContainer} my={5}>
-        <Pagination
-          count={totalPages}
-          color="primary"
-          onChange={handlePagination}
-          page={currentPage}
-        />
-      </Box> */}
+
+      <CustomAlert
+        open={openAlert}
+        severity={alertSeverity}
+        handleClose={() => setOpenAlert(false)}
+        message={alertMessage}
+      />
     </div>
   );
 }

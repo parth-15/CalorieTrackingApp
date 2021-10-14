@@ -15,6 +15,8 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import {deleteFoodEntry, updateFoodEntry} from '../../dataAccess/foodEntry';
+import CustomAlert from '../../components/common/Alert';
 
 const getFormattedTime = time => {
   const hours = parseInt(time / 60);
@@ -42,22 +44,43 @@ export default function FoodEntryTable({
   const [deleteTargetId, setDeleteTargetId] = useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+
   const handleEdit = foodEntry => {
     setEditTarget(foodEntry);
     setEditModalOpen(true);
   };
 
   const handleEditModal = foodEntryInput => {
-    console.log(foodEntryInput);
+    // console.log(foodEntryInput);
+    // console.log('edit target is', editTarget);
+    updateFoodEntry(editTarget.id, foodEntryInput).then(({success, error}) => {
+      if (success !== false) {
+        handleOpenAlert('success', 'Food entry updated successfully');
+        setEditModalOpen(false);
+        fetchFoodEntries(page);
+      } else {
+        handleOpenAlert('error', `Error: ${error}`);
+      }
+    });
   };
 
   const handleDeleteConfirm = () => {
-    console.log(deleteTargetId);
+    deleteFoodEntry(deleteTargetId).then(({success, error}) => {
+      if (success !== false) {
+        handleOpenAlert('success', 'Food entry deleted successfully');
+        setDeleteModalOpen(false);
+        fetchFoodEntries(page);
+      } else {
+        handleOpenAlert('error', `Error: ${error}`);
+      }
+    });
   };
 
   const handleDelete = id => {
     setDeleteTargetId(id);
-    console.log(id);
     setDeleteModalOpen(true);
   };
   const handlePagination = (event, page) => {

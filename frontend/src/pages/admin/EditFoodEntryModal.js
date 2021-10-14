@@ -39,7 +39,6 @@ export default function EditFoodEntryModal({open, onClose, foodEntry, onEdit}) {
     getAllMeals().then(({success, data, error}) => {
       if (success) {
         setMeals(data.rows);
-        console.log(data.rows);
       } else {
         alert('Something went wrong', error);
       }
