@@ -21,3 +21,22 @@ export const getFirstReportOfAdmin = () => {
         },
     );
 };
+
+export const getSecondReportOfAdmin = () => {
+  const token = localStorage.getItem('authToken');
+
+  return axios
+    .get(baseUrl + APIPaths.getSecondAdminReport, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => response.data)
+    .catch(
+      err =>
+        (err && err.response && err.response.data) || {
+          success: false,
+          error: 'Something went wrong',
+        },
+    );
+};
