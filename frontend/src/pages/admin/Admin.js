@@ -100,7 +100,7 @@ export default function Admin() {
             color="primary"
             startIcon={<AssessmentIcon />}
             component={Link}
-            to="/adminreport1"
+            to="/adminreport2"
           >
             Report2
           </Button>
