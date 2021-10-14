@@ -24,6 +24,26 @@ export const getAllFoodEntryOfUser = (userId, page) => {
     );
 };
 
+export const getAllFoodEntries = page => {
+  const token = localStorage.getItem('authToken');
+
+  const queryString = `/?page=${page}`;
+  return axios
+    .get(baseUrl + APIPaths.getAllFoodEntries + queryString, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => response.data)
+    .catch(
+      err =>
+        (err && err.response && err.response.data) || {
+          success: false,
+          error: 'Something went wrong',
+        },
+    );
+};
+
 export const createFoodEntry = foodEntryInput => {
   const token = localStorage.getItem('authToken');
 
@@ -44,12 +64,35 @@ export const createFoodEntry = foodEntryInput => {
     );
 };
 
-export const getAllFoodEntries = page => {
+export const updateFoodEntry = (foodEntryId, foodEntryInput) => {
   const token = localStorage.getItem('authToken');
 
-  const queryString = `/?page=${page}`;
+  const queryString = `/${foodEntryId}`;
+
   return axios
-    .get(baseUrl + APIPaths.getAllFoodEntries + queryString, {
+    .put(baseUrl + APIPaths.updateFoodEntry + queryString, foodEntryInput, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => response.data)
+    .catch(
+      err =>
+        (err && err.response && err.response.data) || {
+          success: false,
+          error: 'Something went wrong',
+        },
+    );
+};
+
+export const deleteFoodEntry = foodEntryId => {
+  const token = localStorage.getItem('authToken');
+
+  const queryString = `/${foodEntryId}`;
+
+  return axios
+    .delete(baseUrl + APIPaths.deleteFoodEntry + queryString, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
