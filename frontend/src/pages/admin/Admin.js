@@ -90,9 +90,19 @@ export default function Admin() {
             color="primary"
             startIcon={<AssessmentIcon />}
             component={Link}
-            to="/adminreport"
+            to="/adminreport1"
           >
-            Reporting
+            Report1
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            startIcon={<AssessmentIcon />}
+            component={Link}
+            to="/adminreport1"
+          >
+            Report2
           </Button>
         </Box>
 
