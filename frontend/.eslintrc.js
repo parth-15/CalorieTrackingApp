@@ -4,23 +4,23 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["react"],
+  plugins: ['react'],
   rules: {
-    "react/prop-types": "off",
-    // "no-unused-vars": "off",
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
+    'react/prop-types': 'off',
+    'no-unused-vars': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };
