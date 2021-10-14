@@ -1,5 +1,6 @@
 export const listFoodEntriesOfUser = '/api/v1/foodEntry/user';
 export const createFoodEntry = '/api/v1/foodEntry';
+export const getAllFoodEntries = '/api/v1/foodEntry';
 
 export const getAllMeals = '/api/v1/meal';
 export const updateMeal = '/api/v1/meal';
