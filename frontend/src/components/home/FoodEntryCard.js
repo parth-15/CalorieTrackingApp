@@ -27,9 +27,17 @@ const useStyles = makeStyles({
   },
 });
 
+const getTimeFormat = unit => {
+  let unitInString = unit.toString();
+  if (unitInString.length < 2) {
+    unitInString = `0${unitInString}`;
+  }
+  return unitInString;
+};
+
 const getFormattedTime = time => {
-  const hours = parseInt(time / 60);
-  const minutes = time % 60;
+  const hours = getTimeFormat(parseInt(time / 60));
+  const minutes = getTimeFormat(time % 60);
   return hours + ':' + minutes;
 };
 
