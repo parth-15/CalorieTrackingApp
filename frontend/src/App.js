@@ -8,6 +8,8 @@ import CreateFoodEntry from './pages/home/CreateFoodEntry';
 import Meal from './pages/home/Meal';
 import UserReport from './pages/home/UserReport';
 import Admin from './pages/admin/Admin';
+import AdminReport1 from './pages/admin/AdminReport1';
+import AdminReport2 from './pages/admin/AdminReport2';
 
 function App() {
   return (
@@ -46,6 +48,20 @@ function App() {
           component={UserReport}
         />
         <AppRoute restrictedTo="admin" exact path="/admin" component={Admin} />
+
+        <AppRoute
+          restrictedTo="admin"
+          exact
+          path="/adminreport1"
+          component={AdminReport1}
+        />
+
+        <AppRoute
+          restrictedTo="admin"
+          exact
+          path="/adminreport2"
+          component={AdminReport2}
+        />
 
         {/* <Route
           path="*"
