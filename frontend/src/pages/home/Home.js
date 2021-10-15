@@ -12,6 +12,9 @@ import {useAuthenticatedUser} from '../../providers/AuthProvider';
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
 import {Link} from 'react-router-dom';
+import CreateFoodEntryModal from '../../components/home/CreateFoodEntryModal';
+import {createFoodEntry} from '../../dataAccess/foodEntry';
+import CustomAlert from '../../components/common/Alert';
 
 const useStyles = makeStyles(theme => ({
   paginationContainer: {display: 'flex', justifyContent: 'center'},
@@ -32,13 +35,46 @@ export default function Home() {
   const [foodEntries, setFoodEntries] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [createFoodEntryModalOpen, setCreateFoodEntryModalOpen] =
+    useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
-  useEffect(() => {
+  const fetchAllFoodEntryOfUser = currentPage => {
     getAllFoodEntryOfUser(user.id, currentPage - 1).then(({data}) => {
       setFoodEntries(data.rows);
       setTotalPages(Math.ceil(data.count / data.perPage));
     });
+  };
+
+  useEffect(() => {
+    fetchAllFoodEntryOfUser(currentPage);
   }, [currentPage]);
+
+  const toggleCreateFoodEntryModalOpen = () => {
+    setCreateFoodEntryModalOpen(!createFoodEntryModalOpen);
+  };
+
+  const handleCreateModal = foodEntryInput => {
+    const time =
+      parseInt(foodEntryInput.hours) * 60 + parseInt(foodEntryInput.minutes);
+    createFoodEntry({...foodEntryInput, time}).then(({success, error}) => {
+      if (success) {
+        handleOpenAlert('success', 'Foodentry created successfully');
+        fetchAllFoodEntryOfUser(currentPage);
+        setCreateFoodEntryModalOpen(false);
+      } else {
+        handleOpenAlert('error', `Error: ${error}`);
+      }
+    });
+  };
+
+  const handleOpenAlert = (severity, message) => {
+    setAlertSeverity(severity);
+    setAlertMessage(message);
+    setOpenAlert(true);
+  };
 
   const handlePagination = (event, count) => {
     setCurrentPage(count);
@@ -50,13 +86,19 @@ export default function Home() {
           <Typography component="h2" variant="h4" style={{flexGrow: 1}}>
             Foodentries
           </Typography>
+
+          <CreateFoodEntryModal
+            open={createFoodEntryModalOpen}
+            onClose={() => setCreateFoodEntryModalOpen(false)}
+            onCreate={handleCreateModal}
+          />
+
           <Button
             className={classes.button}
             variant="contained"
             color="primary"
             startIcon={<AddIcon />}
-            component={Link}
-            to="/create"
+            onClick={toggleCreateFoodEntryModalOpen}
           >
             Foodentry
           </Button>
@@ -102,6 +144,13 @@ export default function Home() {
           page={currentPage}
         />
       </Box>
+
+      <CustomAlert
+        open={openAlert}
+        severity={alertSeverity}
+        handleClose={() => setOpenAlert(false)}
+        message={alertMessage}
+      />
     </div>
   );
 }

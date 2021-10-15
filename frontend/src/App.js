@@ -32,12 +32,6 @@ function App() {
         <AppRoute
           restrictedTo="authenticated"
           exact
-          path="/create"
-          component={CreateFoodEntry}
-        />
-        <AppRoute
-          restrictedTo="authenticated"
-          exact
           path="/meals"
           component={Meal}
         />
