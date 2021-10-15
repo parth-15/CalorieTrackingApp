@@ -73,7 +73,7 @@ export default function UserReport() {
                     <TableCell>
                       {entry.sum > user.maxCalories && (
                         <IconButton color="primary">
-                          <BatteryChargingFullIcon />
+                          <BatteryChargingFullIcon color="secondary" />
                         </IconButton>
                       )}
                     </TableCell>
