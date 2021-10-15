@@ -51,7 +51,7 @@ class FoodEntryController {
       const mealId = req.body.meal;
       const date = req.body.date;
       const userById = await userService.readById(userId);
-      const mealById = await mealService.mealById(mealId);
+      const mealById = await mealService.readById(mealId);
       if (!userById) {
         return res.status(400).json({
           success: false,
