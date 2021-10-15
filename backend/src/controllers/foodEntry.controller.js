@@ -1,5 +1,6 @@
 import foodEntryService from "../services/foodEntry.service";
 import mealService from "../services/meal.service";
+import userService from "../services/user.service";
 
 class FoodEntryController {
   async listFoodEntries(req, res) {
@@ -49,6 +50,20 @@ class FoodEntryController {
       const userId = req.body.user;
       const mealId = req.body.meal;
       const date = req.body.date;
+      const userById = await userService.readById(userId);
+      const mealById = await mealService.mealById(mealId);
+      if (!userById) {
+        return res.status(400).json({
+          success: false,
+          error: "Invalid user id",
+        });
+      }
+      if (!mealById) {
+        return res.status(400).json({
+          success: false,
+          error: "Invalid meal id",
+        });
+      }
       const countPerMeal = await foodEntryService.countByUserAndDateAndMeal(
         userId,
         date,

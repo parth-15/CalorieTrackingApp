@@ -1,5 +1,6 @@
-import User from '../models/user.model';
-import { generate_token } from '../utils/token';
+import User from "../models/user.model";
+import { generate_token } from "../utils/token";
+import mongoose from "mongoose";
 
 class UserService {
   async list() {
@@ -10,6 +11,9 @@ class UserService {
   }
 
   async readById(userId) {
+    if (!mongoose.isValidObjectId(userId)) {
+      return null;
+    }
     const user = await User.findById(userId);
     return user;
   }
@@ -33,7 +37,7 @@ class UserService {
       password: userData.password || randomPassword,
       maxCalories: userData.maxCalories || 2100,
       token: userData.token || randomToken,
-      role: userData.role || 'user',
+      role: userData.role || "user",
     });
     const savedUser = await user.save();
     return savedUser.id;
@@ -50,7 +54,7 @@ class UserService {
         password: userData.password || randomPassword,
         maxCalories: userData.maxCalories || 2100,
         token: userData.token || randomToken,
-        role: userData.role || 'user',
+        role: userData.role || "user",
       },
       { new: true }
     );

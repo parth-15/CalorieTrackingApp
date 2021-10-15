@@ -1,4 +1,5 @@
 import Meal from "../models/meal.model";
+import mongoose from "mongoose";
 
 class MealService {
   async list() {
@@ -9,6 +10,9 @@ class MealService {
   }
 
   async readById(mealId) {
+    if (!mongoose.isValidObjectId(mealId)) {
+      return null;
+    }
     const meal = await Meal.findById(mealId);
     return meal;
   }
