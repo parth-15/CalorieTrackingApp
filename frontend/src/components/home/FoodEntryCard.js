@@ -40,7 +40,7 @@ export default function FoodEntryCard({id, name, date, time, calories, meal}) {
           {name}
         </Typography>
         <Box className={classes.date}>
-          <DateRangeOutlined color="action" />
+          <DateRangeOutlined color="primary" />
           <Typography color="textSecondary">
             {`${date} ${getFormattedTime(time)}`}
           </Typography>

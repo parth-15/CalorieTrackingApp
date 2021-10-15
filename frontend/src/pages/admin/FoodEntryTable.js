@@ -134,7 +134,7 @@ export default function FoodEntryTable({
                     <EditIcon />
                   </IconButton>
                   <IconButton onClick={() => handleDelete(row.id)}>
-                    <DeleteIcon />
+                    <DeleteIcon color="secondary" />
                   </IconButton>
                 </TableCell>
               </TableRow>
