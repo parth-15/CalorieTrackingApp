@@ -59,7 +59,6 @@ export default function EditFoodEntryModal({open, onClose, foodEntry, onEdit}) {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: values => {
-      console.log(values);
       onEdit(values);
     },
   });

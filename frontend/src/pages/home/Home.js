@@ -43,7 +43,6 @@ export default function Home() {
   const handlePagination = (event, count) => {
     setCurrentPage(count);
   };
-  console.log(foodEntries);
   return (
     <div>
       <Container>
