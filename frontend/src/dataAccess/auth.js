@@ -17,6 +17,24 @@ export const login = payload => {
     );
 };
 
+export const inviteFriend = userData => {
+  const token = localStorage.getItem('authToken');
+  return axios
+    .post(baseUrl + APIPaths.signup, userData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => response.data)
+    .catch(
+      err =>
+        (err && err.response && err.response.data) || {
+          success: false,
+          error: 'Something went wrong',
+        },
+    );
+};
+
 export const me = () => {
   const token = localStorage.getItem('authToken');
   return axios
