@@ -44,7 +44,6 @@ export default function CreateFoodEntryModal({open, onClose, onCreate}) {
     getAllMeals().then(({success, data, error}) => {
       if (success) {
         setMeals(data.rows);
-        console.log(data.rows);
       } else {
         alert('Something went wrong', error);
       }
