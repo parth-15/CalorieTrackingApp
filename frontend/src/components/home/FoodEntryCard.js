@@ -22,6 +22,9 @@ const useStyles = makeStyles({
   actionArea: {
     padding: 30,
   },
+  typography: {
+    marginLeft: 15,
+  },
 });
 
 const getFormattedTime = time => {
@@ -41,13 +44,14 @@ export default function FoodEntryCard({id, name, date, time, calories, meal}) {
         </Typography>
         <Box className={classes.date}>
           <DateRangeOutlined color="primary" />
-          <Typography color="textSecondary">
-            {`${date} ${getFormattedTime(time)}`}
+          <Typography color="secondary">{date}</Typography>
+          <Typography className={classes.typography} color="primary">
+            {getFormattedTime(time)}
           </Typography>
         </Box>
-        <Typography color="textPrimary">CALORIES: {calories}</Typography>
+        <Typography color="textPrimary">Calories: {calories}</Typography>
         <Box>
-          <Typography>MEAL: {meal && meal.type}</Typography>
+          <Typography>Meal: {meal && meal.type}</Typography>
         </Box>
       </CardActionArea>
     </Card>

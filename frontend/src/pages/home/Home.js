@@ -11,6 +11,8 @@ import {getAllFoodEntryOfUser} from '../../dataAccess/foodEntry';
 import {useAuthenticatedUser} from '../../providers/AuthProvider';
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
+import LunchDiningIcon from '@mui/icons-material/LunchDining';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 import {Link} from 'react-router-dom';
 import CreateFoodEntryModal from '../../components/home/CreateFoodEntryModal';
 import {createFoodEntry} from '../../dataAccess/foodEntry';
@@ -106,6 +108,7 @@ export default function Home() {
             className={classes.button}
             variant="contained"
             color="primary"
+            startIcon={<LunchDiningIcon />}
             component={Link}
             to="/meals"
           >
@@ -115,12 +118,12 @@ export default function Home() {
             className={classes.button}
             variant="contained"
             color="primary"
+            startIcon={<AssessmentIcon />}
             component={Link}
             to="/userreport"
           >
             Report
           </Button>
-          {/* Add three buttons here for user reporting */}
         </Box>
         {foodEntries.map(foodEntry => (
           <Box my={2} key={foodEntry.id}>
