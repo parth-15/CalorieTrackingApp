@@ -10,6 +10,7 @@ import UserReport from './pages/home/UserReport';
 import Admin from './pages/admin/Admin';
 import AdminReport1 from './pages/admin/AdminReport1';
 import AdminReport2 from './pages/admin/AdminReport2';
+import Error404 from './pages/errors/Error404';
 
 function App() {
   return (
@@ -57,10 +58,7 @@ function App() {
           component={AdminReport2}
         />
 
-        {/* <Route
-          path="*"
-          // component={Error404}
-        /> */}
+        <Route path="*" component={Error404} />
       </Switch>
     </AuthProvider>
   );
