@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import {DateRangeOutlined} from '@material-ui/icons';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -53,9 +54,8 @@ export default function FoodEntryCard({id, name, date, time, calories, meal}) {
         <Box className={classes.date}>
           <DateRangeOutlined color="primary" />
           <Typography color="secondary">{date}</Typography>
-          <Typography className={classes.typography} color="primary">
-            {getFormattedTime(time)}
-          </Typography>
+          <WatchLaterIcon color="primary" className={classes.typography} />
+          <Typography color="primary">{getFormattedTime(time)}</Typography>
         </Box>
         <Typography color="textPrimary">Calories: {calories}</Typography>
         <Box>

@@ -29,9 +29,9 @@ const validationSchema = yup.object({
   name: yup.string().required('Please enter product name'),
   calories: yup.number().moreThan(0).integer(),
   date: yup.date().required(),
-  hours: yup.number().min(0).integer(),
-  minutes: yup.number().min(0).integer(),
-  meal: yup.string().required(),
+  hours: yup.number().min(0).max(23).integer(),
+  minutes: yup.number().min(0).max(59).integer(),
+  meal: yup.string().required('Please select meal'),
   user: yup.string().required(),
 });
 
@@ -148,20 +148,6 @@ export default function CreateFoodEntryModal({open, onClose, onCreate}) {
             fullWidth
             className={classes.formField}
           />
-          {/* <TextField
-            autoFocus
-            label="Meal"
-            id="meal"
-            type="text"
-            variant="outlined"
-            name="meal"
-            value={formik.values.meal}
-            onChange={formik.handleChange}
-            error={formik.touched.meal && formik.errors.meal}
-            helperText={formik.errors.meal}
-            fullWidth
-            className={classes.formField}
-          /> */}
           <Select
             label="Meal"
             name="meal"
