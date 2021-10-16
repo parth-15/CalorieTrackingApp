@@ -1,4 +1,4 @@
-import FoodEntry from "../models/foodEntry.model";
+import FoodEntry from '../models/foodEntry.model';
 
 class FoodEntryService {
   async list(page, perPage, userId) {
@@ -8,7 +8,7 @@ class FoodEntryService {
       count = await FoodEntry.countDocuments({ user: userId });
       await FoodEntry.paginate(
         { user: userId },
-        { populate: ["user", "meal"], page: page + 1, limit: perPage }
+        { populate: ['user', 'meal'], page: page + 1, limit: perPage }
       ).then(function (result) {
         foodEntries = result.docs;
       });
@@ -16,7 +16,7 @@ class FoodEntryService {
       count = await FoodEntry.countDocuments({});
       await FoodEntry.paginate(
         {},
-        { populate: ["user", "meal"], page: page + 1, limit: perPage }
+        { populate: ['user', 'meal'], page: page + 1, limit: perPage }
       ).then(function (result) {
         foodEntries = result.docs;
       });

@@ -1,5 +1,5 @@
-import userService from "../services/user.service";
-import bcrypt from "bcrypt";
+import userService from '../services/user.service';
+import bcrypt from 'bcrypt';
 
 class UserController {
   async getAllUsers(req, res) {
@@ -9,7 +9,7 @@ class UserController {
       res.status(200).json({ success: true, data: users });
     } catch (e) {
       console.error(e);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 
@@ -19,13 +19,13 @@ class UserController {
       if (!user) {
         return res
           .status(404)
-          .json({ success: false, error: "User does not exist" });
+          .json({ success: false, error: 'User does not exist' });
       }
 
       res.status(200).json({ success: true, data: user });
     } catch (e) {
       console.error(e);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 
@@ -35,7 +35,7 @@ class UserController {
       if (userByEmail) {
         return res.status(400).json({
           success: false,
-          error: "User with this email already exist",
+          error: 'User with this email already exist',
         });
       }
       const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
@@ -45,7 +45,7 @@ class UserController {
       res.status(201).json({ success: true, data: { id: userId } });
     } catch (e) {
       console.error(e);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 
@@ -56,7 +56,7 @@ class UserController {
       if (!user) {
         return res
           .status(404)
-          .json({ success: false, error: "User does not exist" });
+          .json({ success: false, error: 'User does not exist' });
       }
       const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 
@@ -67,7 +67,7 @@ class UserController {
       res.status(204).json({});
     } catch (e) {
       console.error(e);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 
@@ -78,14 +78,14 @@ class UserController {
       if (!user) {
         return res
           .status(404)
-          .json({ success: false, error: "User does not exist" });
+          .json({ success: false, error: 'User does not exist' });
       }
 
       await userService.deleteById(req.params.userId);
       res.status(204).json({});
     } catch (e) {
       console.error(e);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 }

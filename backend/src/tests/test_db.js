@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
-import User from "../models/user.model";
+import User from '../models/user.model';
 
 const seedAdmin = async () => {
   const adminName = process.env.DEFAULT_ADMIN_NAME;
@@ -19,7 +19,7 @@ const seedAdmin = async () => {
       password: passwordHash,
       maxCalories: adminMaxCalories,
       token: adminToken,
-      role: "admin",
+      role: 'admin',
     });
   }
 };
@@ -40,7 +40,7 @@ const seedUser = async () => {
       password: passwordHash,
       maxCalories: userMaxCalories,
       token: userToken,
-      role: "user",
+      role: 'user',
     });
   }
 };
@@ -61,7 +61,7 @@ const applyDatabaseSetup = async () => {
 
 export const clearAll = async () => {
   const deletecount = await User.deleteMany({});
-  console.log("-------------------", deletecount);
+  console.log('-------------------', deletecount);
 };
 
 export default applyDatabaseSetup;

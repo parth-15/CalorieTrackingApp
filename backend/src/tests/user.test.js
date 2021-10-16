@@ -1,10 +1,10 @@
-import jest from "jest";
-import supertest from "supertest";
-import app from "../app";
-import mongoose from "mongoose";
+import jest from 'jest';
+import supertest from 'supertest';
+import app from '../app';
+import mongoose from 'mongoose';
 
-import applyDatabaseSetup from "./test_db";
-import { clearAll } from "./test_db";
+import applyDatabaseSetup from './test_db';
+import { clearAll } from './test_db';
 
 const api = supertest(app);
 
@@ -14,13 +14,13 @@ beforeEach(async () => {
   await applyDatabaseSetup();
 });
 
-describe("User API", () => {
-  test("should create new user", async () => {
+describe('User API', () => {
+  test('should create new user', async () => {
     const token = process.env.DEFAULT_ADMIN_TOKEN;
-    const email = "random_user1@test.com";
-    const password = "randomPassword";
+    const email = 'random_user1@test.com';
+    const password = 'randomPassword';
     const response = await api
-      .post("/api/v1/user/")
+      .post('/api/v1/user/')
       .set({ Authorization: `Bearer ${token}` })
       .send({
         email,

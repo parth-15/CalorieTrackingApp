@@ -1,8 +1,8 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-import userService from "../services/user.service";
-import { generate_token } from "../utils/token";
+import userService from '../services/user.service';
+import { generate_token } from '../utils/token';
 
 class AuthController {
   async signup(req, res) {
@@ -11,7 +11,7 @@ class AuthController {
       if (userByEmail) {
         return res.status(400).json({
           success: false,
-          error: "User already exists with this email",
+          error: 'User already exists with this email',
         });
       }
       const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
@@ -21,7 +21,7 @@ class AuthController {
 
       await userService.create({
         ...req.body,
-        role: req.body.role || "user",
+        role: req.body.role || 'user',
       });
 
       res.status(201).json({
@@ -30,7 +30,7 @@ class AuthController {
       });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 
@@ -40,13 +40,13 @@ class AuthController {
       if (!userByToken) {
         return res
           .status(401)
-          .json({ success: false, error: "Authentication failed" });
+          .json({ success: false, error: 'Authentication failed' });
       }
 
       res.status(200).json({ success: true, user: userByToken });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 
@@ -54,7 +54,7 @@ class AuthController {
     try {
       res.status(200).json({ success: true, user: req.user });
     } catch (err) {
-      res.status(500).json({ success: false, error: "Something went wrong" });
+      res.status(500).json({ success: false, error: 'Something went wrong' });
     }
   }
 }

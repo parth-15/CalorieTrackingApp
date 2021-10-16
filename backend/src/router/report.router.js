@@ -12,9 +12,8 @@ reportRouter
     isAuthenticated,
     hasPermission('read', 'adminReport'),
     reportController.getNumberOfFoodEntriesReport
-  ); //working
+  );
 
-//working
 reportRouter
   .route('/admin/2')
   .get(
@@ -23,7 +22,6 @@ reportRouter
     reportController.getNumberOfCaloriesPerUser
   );
 
-//working
 reportRouter
   .route('/user/:userId')
   .get(

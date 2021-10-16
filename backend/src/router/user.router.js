@@ -12,12 +12,12 @@ userRouter
     isAuthenticated,
     hasPermission('read', 'user'),
     userController.getAllUsers
-  ) //working
+  )
   .post(
     isAuthenticated,
     hasPermission('create', 'user'),
     userController.createUser
-  ); //working
+  );
 
 userRouter
   .route('/:userId')
@@ -25,16 +25,16 @@ userRouter
     isAuthenticated,
     hasPermission('read', 'user'),
     userController.getUserById
-  ) //working
+  )
   .put(
     isAuthenticated,
     hasPermission('update', 'user'),
     userController.updateUserById
-  ) //working
+  )
   .delete(
     isAuthenticated,
     hasPermission('delete', 'user'),
     userController.removeUser
-  ); //working
+  );
 
 export default userRouter;

@@ -1,5 +1,5 @@
-import Meal from "../models/meal.model";
-import mongoose from "mongoose";
+import Meal from '../models/meal.model';
+import mongoose from 'mongoose';
 
 class MealService {
   async list() {
@@ -24,9 +24,9 @@ class MealService {
 
   async create(mealData) {
     let maxAllowed;
-    if (mealData.type === "breakfast") {
+    if (mealData.type === 'breakfast') {
       maxAllowed = 3;
-    } else if (mealData.type === "lunch") {
+    } else if (mealData.type === 'lunch') {
       maxAllowed = 5;
     } else {
       maxAllowed = 2;
@@ -41,9 +41,9 @@ class MealService {
 
   async putById(mealId, mealData) {
     let maxAllowed;
-    if (mealData.type === "breakfast") {
+    if (mealData.type === 'breakfast') {
       maxAllowed = 3;
-    } else if (mealData.type === "lunch") {
+    } else if (mealData.type === 'lunch') {
       maxAllowed = 5;
     } else {
       maxAllowed = 2;

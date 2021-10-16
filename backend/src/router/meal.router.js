@@ -13,7 +13,7 @@ mealRouter
     isAuthenticated,
     hasPermission('create', 'meal'),
     mealController.createMeal
-  ); //working
+  );
 
 mealRouter
   .route('/:mealId')
@@ -21,16 +21,16 @@ mealRouter
     isAuthenticated,
     hasPermission('read', 'meal'),
     mealController.getMealById
-  ) //working
+  )
   .put(
     isAuthenticated,
     hasPermission('update', 'meal'),
     mealController.updateMeal
-  ) //working
+  )
   .delete(
     isAuthenticated,
     hasPermission('delete', 'meal'),
     mealController.deleteMeal
-  ); //working
+  );
 
 export default mealRouter;
