@@ -8,8 +8,8 @@ export const getAllMeals = '/api/v1/meal';
 export const updateMeal = '/api/v1/meal';
 
 export const getUserReport = '/api/v1/report/user';
-export const getFirstAdminReport = '/api/v1/report/admin/1';
-export const getSecondAdminReport = '/api/v1/report/admin/2';
+export const getAdminReportOfFoodEntries = '/api/v1/report/foodEntries';
+export const getAdminReportOfCalories = '/api/v1/report/calories';
 
 export const login = '/api/v1/auth/login';
 export const signup = '/api/v1/auth/signup';

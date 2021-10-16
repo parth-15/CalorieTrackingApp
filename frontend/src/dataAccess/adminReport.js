@@ -7,7 +7,7 @@ export const getFirstReportOfAdmin = () => {
   const token = localStorage.getItem('authToken');
 
   return axios
-    .get(baseUrl + APIPaths.getFirstAdminReport, {
+    .get(baseUrl + APIPaths.getAdminReportOfFoodEntries, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,7 +26,7 @@ export const getSecondReportOfAdmin = () => {
   const token = localStorage.getItem('authToken');
 
   return axios
-    .get(baseUrl + APIPaths.getSecondAdminReport, {
+    .get(baseUrl + APIPaths.getAdminReportOfCalories, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
