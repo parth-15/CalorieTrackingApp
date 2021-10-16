@@ -46,7 +46,7 @@ export default function FoodEntryCard({id, name, date, time, calories, meal}) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} style={{border: '1px solid black'}}>
       <CardActionArea className={classes.actionArea}>
         <Typography variant="h5" component="h2">
           {name}

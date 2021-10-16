@@ -18,9 +18,17 @@ import EditIcon from '@material-ui/icons/Edit';
 import {deleteFoodEntry, updateFoodEntry} from '../../dataAccess/foodEntry';
 import CustomAlert from '../../components/common/Alert';
 
+const getTimeFormat = unit => {
+  let unitInString = unit.toString();
+  if (unitInString.length < 2) {
+    unitInString = `0${unitInString}`;
+  }
+  return unitInString;
+};
+
 const getFormattedTime = time => {
-  const hours = parseInt(time / 60);
-  const minutes = time % 60;
+  const hours = getTimeFormat(parseInt(time / 60));
+  const minutes = getTimeFormat(time % 60);
   return hours + ':' + minutes;
 };
 
@@ -54,7 +62,6 @@ export default function FoodEntryTable({
   };
 
   const handleEditModal = foodEntryInput => {
-    console.log('edit target is', editTarget);
     foodEntryInput.time =
       parseInt(foodEntryInput.hours) * 60 + parseInt(foodEntryInput.minutes);
     console.log(foodEntryInput);
