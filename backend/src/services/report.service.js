@@ -26,13 +26,17 @@ class ReportService {
       {
         $group: {
           _id: "$user",
-          average: {
-            $avg: "$calories",
+          sum: {
+            $sum: "$calories",
           },
         },
       },
     ]);
-    return entries;
+    const averagedCaloriesEntry = entries.map(entry => ({
+      _id: entry._id,
+      average: parseInt(entry.sum / 7),
+    }));
+    return averagedCaloriesEntry;
   }
 
   async getTotalCaloriesPerUserPerDay(userId) {
