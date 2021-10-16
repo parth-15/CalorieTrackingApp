@@ -61,7 +61,6 @@ const applyDatabaseSetup = async () => {
 
 export const clearAll = async () => {
   const deletecount = await User.deleteMany({});
-  console.log('-------------------', deletecount);
 };
 
 export default applyDatabaseSetup;

@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
     "start": "NODE_ENV=production node esm -r src/server.js",
     "dev": "nodemon  --es-module-specifier-resolution=node -r dotenv/config src/server.js"
   },
