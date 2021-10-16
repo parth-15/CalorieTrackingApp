@@ -54,8 +54,11 @@ export default function FoodEntryTable({
   };
 
   const handleEditModal = foodEntryInput => {
-    // console.log(foodEntryInput);
-    // console.log('edit target is', editTarget);
+    console.log('edit target is', editTarget);
+    foodEntryInput.time =
+      parseInt(foodEntryInput.hours) * 60 + parseInt(foodEntryInput.minutes);
+    console.log(foodEntryInput);
+
     updateFoodEntry(editTarget.id, foodEntryInput).then(({success, error}) => {
       if (success !== false) {
         handleOpenAlert('success', 'Food entry updated successfully');
@@ -119,26 +122,27 @@ export default function FoodEntryTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {foodEntries.map(row => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{`${row.date} ${getFormattedTime(
-                  row.time,
-                )}`}</TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.user.id}</TableCell>
-                <TableCell>{row.meal.type}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleEdit(row)} color="primary">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton onClick={() => handleDelete(row.id)}>
-                    <DeleteIcon color="secondary" />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {foodEntries &&
+              foodEntries.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{`${row.date} ${getFormattedTime(
+                    row.time,
+                  )}`}</TableCell>
+                  <TableCell>{row.calories}</TableCell>
+                  <TableCell>{row.user && row.user.id}</TableCell>
+                  <TableCell>{row.meal && row.meal.type}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleEdit(row)} color="primary">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleDelete(row.id)}>
+                      <DeleteIcon color="secondary" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
           <TableFooter>
             <TablePagination
