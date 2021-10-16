@@ -25,7 +25,7 @@ class ReportController {
     }
   }
 
-  async getNumberOfCaloriesPerUser(req, res) {
+  async getNumberOfCaloriesPerUserInPastWeekReport(req, res) {
     try {
       const today = moment().format('YYYY-MM-DD');
       const past7days = moment().subtract('days', 7).format('YYYY-MM-DD');

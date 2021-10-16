@@ -7,7 +7,7 @@ import hasPermission from '../middlewares/permission.middleware';
 const reportRouter = Router();
 
 reportRouter
-  .route('/admin/1')
+  .route('/foodEntries')
   .get(
     isAuthenticated,
     hasPermission('read', 'adminReport'),
@@ -15,11 +15,11 @@ reportRouter
   );
 
 reportRouter
-  .route('/admin/2')
+  .route('/calories')
   .get(
     isAuthenticated,
     hasPermission('read', 'adminReport'),
-    reportController.getNumberOfCaloriesPerUser
+    reportController.getNumberOfCaloriesPerUserInPastWeekReport
   );
 
 reportRouter
