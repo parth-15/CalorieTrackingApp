@@ -54,7 +54,7 @@ class UserService {
         password: userData.password || randomPassword,
         maxCalories: userData.maxCalories || 2100,
         token: userData.token || randomToken,
-        role: userData.role || "user",
+        role: userData.role,
       },
       { new: true }
     );
