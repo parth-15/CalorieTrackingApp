@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
 import User from '../models/user.model';
+import Meal from '../models/meal.model';
 
 const seedAdmin = async () => {
   const adminName = process.env.DEFAULT_ADMIN_NAME;
@@ -45,6 +46,30 @@ const seedUser = async () => {
   }
 };
 
+const seedMeals = async () => {
+  const breakFastMeal = await Meal.findOne({ type: 'breakfast' });
+  if (!breakFastMeal) {
+    await Meal.create({
+      type: 'breakfast',
+      maxAllowed: 3,
+    });
+  }
+  const lunchMeal = await Meal.findOne({ type: 'lunch' });
+  if (!lunchMeal) {
+    await Meal.create({
+      type: 'lunch',
+      maxAllowed: 5,
+    });
+  }
+  const dinnerMeal = await Meal.findOne({ type: 'dinner' });
+  if (!dinnerMeal) {
+    await Meal.create({
+      type: 'dinner',
+      maxAllowed: 2,
+    });
+  }
+};
+
 const connectDb = async () => {
   await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -56,6 +81,7 @@ const applyDatabaseSetup = async () => {
   await connectDb();
   await seedAdmin();
   await seedUser();
+  await seedMeals();
 };
 
 export default applyDatabaseSetup;
