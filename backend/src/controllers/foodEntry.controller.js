@@ -92,6 +92,13 @@ class FoodEntryController {
       const mealId = req.body.meal;
       const date = req.body.date;
       const foodEntryId = req.params.foodEntryId;
+      const mealById = await mealService.readById(mealId);
+      if (!mealById) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid meal id',
+        });
+      }
       const oldMealId = (
         await foodEntryService.readById(foodEntryId)
       ).meal.toString();
