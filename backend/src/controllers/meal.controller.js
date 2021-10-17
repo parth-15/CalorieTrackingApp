@@ -1,6 +1,7 @@
 import mealService from '../services/meal.service';
 
 class MealController {
+  //controller for listing all meals
   async listMeals(req, res) {
     try {
       const meals = await mealService.list();
@@ -14,6 +15,7 @@ class MealController {
     }
   }
 
+  //controller for getting meal by id
   async getMealById(req, res) {
     try {
       const meal = await mealService.readById(req.params.mealId);
@@ -29,6 +31,7 @@ class MealController {
     }
   }
 
+  //controller for creating a meal
   async createMeal(req, res) {
     try {
       const type = req.body.type;
@@ -47,6 +50,7 @@ class MealController {
     }
   }
 
+  //controller for updating a meal
   async updateMeal(req, res) {
     try {
       const meal = await mealService.readById(req.params.mealId);
@@ -72,6 +76,7 @@ class MealController {
     }
   }
 
+  //controller for deleting a meal
   async deleteMeal(req, res) {
     try {
       const meal = await mealService.readById(req.params.mealId);

@@ -3,6 +3,7 @@ import mealService from '../services/meal.service';
 import userService from '../services/user.service';
 
 class FoodEntryController {
+  //controller for listing all food entries of all users in paginated way
   async listFoodEntries(req, res) {
     try {
       const page = parseInt(req.query.page) || 0;
@@ -17,6 +18,7 @@ class FoodEntryController {
     }
   }
 
+  //controller for listing all food entries of specific user in paginated way
   async listFoodEntriesOfUser(req, res) {
     try {
       const page = parseInt(req.query.page) || 0;
@@ -32,6 +34,7 @@ class FoodEntryController {
     }
   }
 
+  //controller for getting food entry by id
   async getFoodEntryById(req, res) {
     try {
       const foodEntry = await foodEntryService.readById(req.params.foodEntryId);
@@ -45,6 +48,7 @@ class FoodEntryController {
     }
   }
 
+  //controller for creating new food entry
   async createFoodEntry(req, res) {
     try {
       const userId = req.body.user;
@@ -86,12 +90,20 @@ class FoodEntryController {
     }
   }
 
+  //controller for updating food entry
   async updateFoodEntry(req, res) {
     try {
       const userId = req.body.user;
       const mealId = req.body.meal;
       const date = req.body.date;
       const foodEntryId = req.params.foodEntryId;
+      const userById = await userService.readById(userId);
+      if (!userById) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid user id',
+        });
+      }
       const mealById = await mealService.readById(mealId);
       if (!mealById) {
         return res.status(400).json({
@@ -129,6 +141,7 @@ class FoodEntryController {
     }
   }
 
+  //controller for deleting food entry
   async deleteFoodEntry(req, res) {
     try {
       const foodEntry = await foodEntryService.readById(req.params.foodEntryId);

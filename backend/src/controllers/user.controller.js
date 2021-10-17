@@ -2,6 +2,7 @@ import userService from '../services/user.service';
 import bcrypt from 'bcrypt';
 
 class UserController {
+  //controller for getting all the users
   async getAllUsers(req, res) {
     try {
       const users = await userService.list();
@@ -13,6 +14,7 @@ class UserController {
     }
   }
 
+  //controller for getting user by id
   async getUserById(req, res) {
     try {
       const user = await userService.readById(req.params.userId);
@@ -29,6 +31,7 @@ class UserController {
     }
   }
 
+  //controller for creating new user
   async createUser(req, res) {
     try {
       const userByEmail = await userService.findByEmail(req.body.email);
@@ -49,6 +52,7 @@ class UserController {
     }
   }
 
+  //controller for updating user
   async updateUserById(req, res) {
     try {
       const user = await userService.readById(req.params.userId);
@@ -71,6 +75,7 @@ class UserController {
     }
   }
 
+  //controller for deleting a user
   async removeUser(req, res) {
     try {
       const user = await userService.readById(req.params.userId);

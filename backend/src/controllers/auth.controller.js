@@ -5,6 +5,7 @@ import userService from '../services/user.service';
 import { generate_token } from '../utils/token';
 
 class AuthController {
+  //controller for inviting a friend using name and email
   async signup(req, res) {
     try {
       const userByEmail = await userService.findByEmail(req.body.email);
@@ -34,6 +35,7 @@ class AuthController {
     }
   }
 
+  //controller for signing in existing user using token
   async login(req, res) {
     try {
       const userByToken = await userService.findByToken(req.body.token);
@@ -50,6 +52,7 @@ class AuthController {
     }
   }
 
+  //controller for getting user object for authenticated user from token
   async me(req, res) {
     try {
       res.status(200).json({ success: true, user: req.user });
