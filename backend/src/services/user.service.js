@@ -51,9 +51,9 @@ class UserService {
       {
         name: userData.name,
         email: userData.email,
-        password: userData.password || randomPassword,
-        maxCalories: userData.maxCalories || 2100,
-        token: userData.token || randomToken,
+        password: userData.password,
+        maxCalories: userData.maxCalories,
+        token: userData.token,
         role: userData.role,
       },
       { new: true }
