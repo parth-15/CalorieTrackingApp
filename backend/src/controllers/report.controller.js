@@ -5,11 +5,12 @@ class ReportController {
   async getNumberOfFoodEntriesReport(req, res) {
     try {
       const today = moment().format('YYYY-MM-DD');
+      const past6days = moment().subtract('days', 6).format('YYYY-MM-DD');
       const past7days = moment().subtract('days', 7).format('YYYY-MM-DD');
-      const past14days = moment().subtract('days', 14).format('YYYY-MM-DD');
+      const past14days = moment().subtract('days', 13).format('YYYY-MM-DD');
       console.log(today, past7days, past14days);
       const pastWeekCount = await reportService.getNumberOfFoodEntriesInRange(
-        past7days,
+        past6days,
         today
       );
       const past2WeekCount = await reportService.getNumberOfFoodEntriesInRange(
