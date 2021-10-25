@@ -7,6 +7,7 @@ import {
   makeStyles,
   Select,
   MenuItem,
+  InputLabel,
 } from '@material-ui/core';
 import {
   KeyboardDatePicker,
@@ -52,11 +53,11 @@ export default function CreateFoodEntryModal({open, onClose, onCreate}) {
 
   const formik = useFormik({
     initialValues: {
-      name: 'Milk',
-      calories: 110,
+      name: '',
+      calories: '',
       date: new Date().toISOString().slice(0, 10),
-      hours: 9,
-      minutes: 0,
+      hours: '',
+      minutes: '',
       meal: 'user',
       user: user.id,
     },
@@ -148,14 +149,16 @@ export default function CreateFoodEntryModal({open, onClose, onCreate}) {
             fullWidth
             className={classes.formField}
           />
+          <InputLabel id="meal-label">Meal</InputLabel>
           <Select
-            label="Meal"
             name="meal"
             value={formik.values.meal}
             onChange={formik.handleChange}
             error={formik.touched.meal && formik.errors.meal}
             fullWidth
             className={classes.formField}
+            labelId="meal-label"
+            label="Meal"
           >
             {meals &&
               meals.map(meal => (
